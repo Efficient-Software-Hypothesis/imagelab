@@ -1,0 +1,16 @@
+package imagelab;
+
+import org.junit.Test;
+
+/** Unit test for DisplayImage.java
+ */
+
+public class DisplayImageTest {
+
+    @Test
+    public void constructorTest () {
+        String testString = "TEST";
+        DisplayImage DisplayTest = new DisplayImage(null, testString);
+    }
+
+}

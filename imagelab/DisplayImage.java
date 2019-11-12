@@ -68,7 +68,7 @@ public class DisplayImage extends ILFrame {
         int pixwidth  = imp.pixwidth;
         img = getToolkit().createImage(
                 new MemoryImageSource(pixwidth, pixheight, showpix, 0, pixwidth));
-        pane        = new DisPanel(img);
+        pane = new DisPanel(img);
         getContentPane().add(pane,"Center");
         int width;
         int height;
