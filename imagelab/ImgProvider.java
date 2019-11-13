@@ -21,23 +21,23 @@ public class ImgProvider extends JComponent {
 
     static boolean  all;
     /** true if this ImgProvider currently holds an image; false otherwise. */
-    boolean         isLoaded;
+    boolean isLoaded;
     /** Image height in pixels. */
-    int             pixheight;
+    int pixheight;
     /** Image width in pixels. */
-    int             pixwidth;
+    int pixwidth;
     /** The raw image. */
-    Image           img;
+    Image img;
     /** Holders for the color and alpha components of the image. */
-    short [][]      red, green, blue, alpha;
+    short [][] red, green, blue, alpha;
     /** To retrieve pixels from the image. */
-    PixelGrabber    grab;
+    PixelGrabber grab;
     /** Holder for the pixels from the image. */
-    int []          pix;
+    int [] pix;
     /** X-axis increment used for trimming the image. */
-    protected int   xinc= 0;
+    protected int xinc= 0;
     /** Y-axis increment used for trimming the image. */
-    protected int   yinc = 0;
+    protected int yinc = 0;
     /** Holder for the filename of the file that contains the image. */
     protected String imgName;
     /** Used for assigning unique IDs to ImgProviders. Incremented when used. */
