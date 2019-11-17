@@ -32,6 +32,11 @@ dependencies {
 
     // JUnit compile dependencies
     testCompile 'junit:junit:4.12'
+
+    // Compile test Junit
+    testCompile 'junit:junit:4.12'
+
+    // Compile Junit
     compile 'junit:junit:4.12'
 }
 
