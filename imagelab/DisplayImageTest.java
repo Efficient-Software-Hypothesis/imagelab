@@ -1,6 +1,7 @@
 package imagelab;
 
 import org.junit.Test;
+import org.junit.DisplayName;
 import static org.junit.Assert.*;
 import java.io.*;
 
@@ -16,6 +17,7 @@ public class DisplayImageTest {
      * Test for constructor
      */
     @Test
+    @DiplayName ("Constructor Test")
     public void constructorTest () {
         /**
          * TODO iterate through the images directory to ensure they all construct as a proper
@@ -31,8 +33,16 @@ public class DisplayImageTest {
      * output is given, as per the source code
      */
 
+    @Test
+    public void impNullTest() {
+        DisplayImage nullTest = new DisplayImage(null, testString);
+        OutputStream outStream = new ByteArrayOutputStream();
+        PrintStream printS = new PrintStream(outStream);
+        System.setOut(printS);
+        assertEquals("***DisplayImage: imp is null!!! ***", outStream.toStream());
+    }
+
     /**
      * TODO write event tracking test.
      */
-
 }
