@@ -30,9 +30,6 @@ dependencies {
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 
-    // JUnit compile dependencies
-    testCompile 'junit:junit:4.12'
-
     // Compile test Junit
     testCompile 'junit:junit:4.12'
 
@@ -44,14 +41,16 @@ dependencies {
 sourceSets {
     main {
         java {
-            srcDirs('imagelab','filters','sound','/')
+            srcDir 'imagelab'
+            srcDir 'filters'
+            srcDir 'sound'
         }
     }
 }
 
 application {
     // Define the main class for the application
-    mainClassName = 'Run'
+    mainClassName = 'imagelab.ImageLab'
 }
 
 // Define jacoco version to be used
@@ -82,62 +81,4 @@ jacocoTestCoverageVerification {
             }
         }
     }
-} 
-
-/* moveClassFilesToRootDirs will move all compiled 
-** .class files to their corresponding root directory.
-** Moving the files to their corresponding root
-** directory is necessary for mimicking BlueJ's 
-** convention as the project is designed to search 
-** the root directories for .class files. 
-*/
-task moveClassFilesToRootDirs {
-    task copyFilterClassFiles(type: Copy) {
-        from ('build/classes/java/main/filters')
-        into 'filters/'
-    }
-    task copyImagelabClassFiles(type: Copy) {
-        from ('build/classes/java/main/imagelab')
-        into 'imagelab/'
-    }
-    task copySoundClassFiles(type: Copy) {
-        from ('build/classes/java/main/sound')
-        into 'sound/'
-    }
-    task copyRunClassFile(type: Copy) {
-        from ('build/classes/java/main')
-        into '/'
-    }
-    task copyImageLabJarFile(type: Copy) {
-        from ('build/libs')
-        into '/'
-    }
-    task removeBuildClassesDir(type: Delete) {
-        delete 'build/classes'
-    }
 }
-// List the tasks to be executed within moveClassFilesToRootDirs task
-moveClassFilesToRootDirs.dependsOn copyFilterClassFiles, copyImagelabClassFiles, 
-copySoundClassFiles, copyRunClassFile, copyImageLabJarFile
-moveClassFilesToRootDirs.finalizedBy removeBuildClassesDir
-
-run.dependsOn copyFilterClassFiles
-build.finalizedBy moveClassFilesToRootDirs
-
-
-// remove all *.class files from filters, imagelab, sound
-task removeClassFilesFromRootDirs {
-    delete fileTree("filters").matching {
-        include "*.class"
-    }
-    delete fileTree("imagelab").matching {
-        include "*.class"
-    }
-    delete fileTree("sound").matching {
-        include "*.class"
-    }
-    delete fileTree("/").matching {
-        include "Run.class"
-    }
-}
-clean.finalizedBy removeClassFilesFromRootDirs
