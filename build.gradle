@@ -42,6 +42,11 @@ sourceSets {
             srcDirs('imagelab','filters','sound')
         }
     }
+    test {
+        java {
+            srcDirs = ["imagelab"]
+        }
+    }
 }
 
 application {
