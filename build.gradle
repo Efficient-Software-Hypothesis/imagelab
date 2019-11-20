@@ -39,14 +39,19 @@ dependencies {
 sourceSets {
     main {
         java {
-            srcDirs('imagelab','filters','sound',"${project.projectDir}")
+            srcDirs('imagelab','filters','sound')
+        }
+    }
+    test {
+        java {
+            srcDirs = ["imagelab"]
         }
     }
 }
 
 application {
     // Define the main class for the application
-    mainClassName = 'Run'
+    mainClassName = 'imagelab.ImageLab'
 }
 
 // Define jacoco version to be used
@@ -77,14 +82,14 @@ jacocoTestCoverageVerification {
             }
         }
     }
-} 
+}
 
-/* moveClassFilesToRootDirs will move all compiled 
+/* moveClassFilesToRootDirs will move all compiled
 ** .class files to their corresponding root directory.
 ** Moving the files to their corresponding root
-** directory is necessary for mimicking BlueJ's 
-** convention as the project is designed to search 
-** the root directories for .class files. 
+** directory is necessary for mimicking BlueJ's
+** convention as the project is designed to search
+** the root directories for .class files.
 */
 task moveClassFilesToRootDirs {
     task copyFilterClassFiles(type: Copy) {
@@ -99,25 +104,13 @@ task moveClassFilesToRootDirs {
         from ('build/classes/java/main/sound')
         into 'sound/'
     }
-    task copyRunClassFile(type: Copy) {
-        from ('build/classes/java/main')
-        into "${project.projectDir}"
-    }
-    task copyImageLabJarFile(type: Copy) {
-        from ('build/libs')
-        into "${project.projectDir}"
-    }
     task removeBuildClassesDir(type: Delete) {
         delete 'build/classes'
     }
-    task removeBuildLibsDir(type: Delete) {
-        delete 'build/libs'
-    }
 }
 // List the tasks to be executed within moveClassFilesToRootDirs task
-moveClassFilesToRootDirs.dependsOn copyFilterClassFiles, copyImagelabClassFiles, 
-copySoundClassFiles, copyRunClassFile, copyImageLabJarFile
-moveClassFilesToRootDirs.finalizedBy removeBuildClassesDir, removeBuildLibsDir
+moveClassFilesToRootDirs.dependsOn copyFilterClassFiles, copyImagelabClassFiles, copySoundClassFiles
+moveClassFilesToRootDirs.finalizedBy removeBuildClassesDir
 
 run.dependsOn copyFilterClassFiles
 build.finalizedBy moveClassFilesToRootDirs
@@ -134,8 +127,6 @@ task removeClassFilesFromRootDirs {
     delete fileTree("sound").matching {
         include "*.class"
     }
-    delete fileTree("${project.projectDir}").matching {
-        include "Run.class"
-    }
 }
+
 clean.finalizedBy removeClassFilesFromRootDirs
